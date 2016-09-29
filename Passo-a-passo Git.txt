@@ -3,7 +3,23 @@
 reque:~/workspace (master) $ git add .
 reque:~/workspace (master) $ git commit
 
-// Vai abrir uma tela, basta descomentar o que deve ser commitado e dar um Ctrl+X - YES
+// Vai abrir uma tela, basta descomentar o que deve ser commitado e dar um Ctrl+O - YES - Ctrl+X
+
+<EXEMPLO>
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+       new file:   Passo-a-passo Git.txt
+       modified:   index.html
+#
+
+Ctrl + O
+Confirma
+Ctrl + X
+
 [master 3ada276]        new file:   index.html
  1 file changed, 9 insertions(+)
  create mode 100644 index.html
