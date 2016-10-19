@@ -1,3 +1,15 @@
+index.html
+Details
+Activity
+EARLIER THIS MONTH
+F
+Fabiano Azevedo uploaded an item
+5 Oct
+HTML
+index.html
+No recorded activity before 5 October 2016
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,16 +153,64 @@
     <!-- Callout -->
  
     <!-- Portfolio -->
+	
+	<script type="text/javascript">
+		function BtnConsulta()
+		{	
+		    
+              
+            circle.setMap(null);
+    		console.log("oi");
+			
+			var tag = $("#tag").val();
+			console.log(tag);
+			
+			var request = $.ajax({
+				url: "getTag.php",
+				type: "POST",
+				data: "tag=" + tag,
+				dataType: "json"
+			}).done(function(dados) {
+				console.log(dados);
+				for (var i = 0; i < markers_on_map.length; i++ ) {
+                     markers_on_map[i].setMap(null);
+                  }
+                  markers_on_map.length = 0;
+				
+				var marker,i;
+				for(i=0;i< dados.length; i++){
+					marker = new google.maps.Marker({
+						position: new google.maps.LatLng(dados[i].ani_latitude,dados[i].ani_longitude),
+						map: map,
+						animation: google.maps.Animation.DROP,
+						title: dados[i].ani_nome
+					});
+					markers_on_map.push(marker);
+				}
+
+			}).fail(function(jqXHR, textStatus ) {
+				console.log("Request failed: " + textStatus);
+
+			}).always(function() {
+				console.log("completou");
+			});
+
+		
+		}
+	</script>
+	
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Our Work</h2>
-                    <hr class="small">
-                   
-                    <!-- /.row (nested) -->
-                    <a href="#" class="btn btn-dark">View More Items</a>
-                </div>
+				
+			<form>	
+				<label for="label2"> TAG: </label> <input type="text" name="tag" id="tag" value="" size="20" />
+				<div class="col-lg-10 col-lg-offset-1 text-center">
+					<input style="width: 190px; height: 40px" type="button" value="Pesquisa por TAG" name="btn_tag" onclick="BtnConsulta()"/>
+				</div>
+			</form>	
+				
                 <!-- /.col-lg-10 -->
             </div>
             <!-- /.row -->
@@ -164,10 +224,10 @@
         <div id="map"></div>
         <script type="text/javascript">
         var map;
-        var radius_circle = null;
         var markers_on_map = [];
         var radius = 2500;
         var coord = {lat: -30.03518581, lng: -51.22660625};
+        var circle;
   
         function initMap() {
           map = new google.maps.Map(document.getElementById('map'), {
@@ -176,10 +236,10 @@
           });
           var mRadius = new google.maps.Marker({
 				position: new google.maps.LatLng(coord),
-				map: map
-              
+				map: map,
+				icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
           });
-          var circle = new google.maps.Circle({
+          circle = new google.maps.Circle({
             map: map,
             radius: radius,
             fillColor: '#AA0000'
@@ -192,19 +252,21 @@
 				url: 'getDados.php',//Definindo o arquivo onde ser�o buscados os dados
 				success: function(dados){
 				    
+				    console.log(dados);
+				    
                   	var address_lat_lng = new google.maps.LatLng(coord);
                   	
                 	if(circle) map.fitBounds(circle.getBounds());
                   	for (var j = 0; j < dados.length; j++) {
                   	    
                   		(function (location) {
-                  		    var marker_lat_lng = new google.maps.LatLng(location.latitude, location.longitude);
+                  		    var marker_lat_lng = new google.maps.LatLng(location.ani_latitude, location.ani_longitude);
                   			var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng);
                   			if (distance_from_location <= radius) {
                   				var new_marker = new google.maps.Marker({
                   					position: marker_lat_lng,
                   					map: map,
-                  					title: location.info
+                  					title: location.ani_nome
                   				});
                   				markers_on_map.push(new_marker);
                   			}
@@ -213,27 +275,7 @@
 				},
 				error: function(){console.log('erro')}
 			});	
-			
-			$.ajax({
-				type:'post',		//Definimos o m�todo HTTP usado
-				dataType: 'json',	//Definimos o tipo de retorno
-				url: 'getDados.php',//Definindo o arquivo onde ser�o buscados os dados
-				success: function(dados){
-				
-				console.log(dados);
-				var marker,i;
-				for(i=0;i< dados.length; i++){
-					marker = new google.maps.Marker({
-						position: new google.maps.LatLng(dados[i].latitude,dados[i].longitude),
-						map: map,
-						animation: google.maps.Animation.DROP
-					});
-				}
-				},
-				error: function(){console.log('erro')}
-			});	
-			
-    }
+      }
       </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGoNeSNZCJ5k6CmrmJ1hCB5WzW4DPka0&v=3&callback=initMap"></script>
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
