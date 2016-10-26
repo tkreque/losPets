@@ -1,9 +1,9 @@
 <?php
     //Conectando ao banco de dados
-    $con = new mysqli("localhost", "root", "usbw", "pets");
+    $con = new mysqli("localhost", "pets", "123", "pets");
     if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
 	
-	$tag = $_POST["opcao"];
+	$tag = $_POST["tag"];
 	
 	$SQL = "SELECT ani_latitude , ani_longitude, ani_nome, raca.raca_nome FROM animal
 	INNER JOIN raca ON animal.ani_raca = raca.raca_id

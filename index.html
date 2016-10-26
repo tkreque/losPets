@@ -52,6 +52,42 @@
                 <a href="#top" onclick=$( "#menu-close").click();>Home</a>
             </li>
             <li>
+				<a href="#" onclick=$( "#menu-close").click();>Incluir Animal</a>
+            </li>
+            <li>
+				<a href="#" onclick=$( "#menu-close").click();>Mostrar todos os Animais</a>
+				<input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar todos animais" name="btn_tag" onclick="BtnCon()"/>
+            </li>
+            <li>
+				<a href="#" onclick=$( "#menu-close").click();>Consulta por Porte</a>
+			    <form>	
+    				<select onchange="BtnConsultaPorte(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    					  <option value="P" name="porte1">Pequeno</option>
+    					  <option value="M" name="porte2">Médio</option>
+    					  <option value="G" name="porte3">Grande</option>
+    				</select>
+			    </form>	
+			</li>
+			<li>
+				<a href="#" onclick=$( "#menu-close").click();>Consulta por Tag</a>
+			    <form>	
+    				<select onchange="BtnConsultaTag(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    					  <option value="MANSO" name="tag1">Manso</option>
+    					  <option value="AGITADO" name="tag2">Agitado</option>
+    					  <option value="DORMINHOCO" name="tag3">Dorminhoco</option>
+    					  <option value="BRINCALHAO" name="tag4">Brincalhão</option>
+    					  <option value="FILHOTE" name="tag5">Filhote</option>
+    					  <option value="ADULTO" name="tag6">Adulto</option>
+    					  <option value="IDOSO" name="tag7">Idoso</option>
+    					  <option value="CASTRADO" name="tag8">Castrado</option>
+    					  <option value="PELUDO" name="tag9">Peludo</option>
+    					  <option value="TOSADO" name="tag10">Tosado</option>
+    					  <option value="BRAVO" name="tag11">Bravo</option>
+    					  <option value="ESPECIAL" name="tag12">Especial</option>
+    				</select>
+    		    </form>	
+			</li>
+            <li>
                 <a href="#portfolio" onclick=$( "#menu-close").click();>Portfolio</a>
             </li>
             <li>
@@ -69,7 +105,7 @@
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-left">
                         <h1>Los Pets
-                        <small>Lorem lipsum avacalhadus</small>
+                        <small>O seu pet está aqui!</small>
                         </h1>
                         <!-- /.row (nested) -->
                     </div>
@@ -80,69 +116,12 @@
             <!-- /.container -->
      </header>
 
-    <!-- Portfolio -->
+    <!-- Scripts das pesquisas -->
+	<script type="text/javascript" src="js/consultaTodos.js"></script>
+	<script type="text/javascript" src="js/consultaTag.js"></script>
+	<script type="text/javascript" src="js/consultaPorte.js"></script>
 	
-	<script type="text/javascript">
-		function BtnConsulta()
-		{	
-            circle.setMap(null);
-    		
-			var tag = $("#tag").val();
-			console.log(tag);
-			
-			var request = $.ajax({
-				url: "getTag.php",
-				type: "POST",
-				data: "tag=" + tag,
-				dataType: "json"
-			}).done(function(dados) {
-				console.log(dados);
-				for (var i = 0; i < markers_on_map.length; i++ ) {
-                     markers_on_map[i].setMap(null);
-                  }
-                  markers_on_map.length = 0;
-				
-				var marker,i;
-				for(i=0;i< dados.length; i++){
-					marker = new google.maps.Marker({
-						position: new google.maps.LatLng(dados[i].ani_latitude,dados[i].ani_longitude),
-						map: map,
-						animation: google.maps.Animation.DROP,
-						title: dados[i].ani_nome,
-						infowindow: new google.maps.InfoWindow({
-                            content: "<p>Nome: "+dados[i].ani_nome+"<br />Raça: "+dados[i].raca_nome+"</p>"
-                        })
-					});
-					markers_on_map.push(marker);
-					google.maps.event.addListener(marker, 'click', function() {
-                        this.infowindow.open(map, this);
-                    }); 
-				}
-			}).fail(function(jqXHR, textStatus ) {
-				console.log("Request failed: " + textStatus);
-			});
-		}
-	</script>
-	
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-				
-			<form>	
-				<label for="label2"> TAG: </label> 
-				<input type="text" name="tag" id="tag" value="" size="20" />
-				<div class="col-lg-10 col-lg-offset-1 text-center">
-					<input style="width: 190px; height: 40px" type="button" value="Pesquisa por TAG" name="btn_tag" onclick="BtnConsulta()"/>
-				</div>
-			</form>	
-				
-                <!-- /.col-lg-10 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
+ 
 
     <!-- Map -->
   
@@ -218,7 +197,7 @@
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-left">
                         <h2>Eventos
-                        <small>Lorem lipsum avacalhadus</small>
+                        <small>Em desenvolvimento</small>
                         </h1>
                         <!-- /.row (nested) -->
                     </div>
@@ -234,7 +213,7 @@
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-left">
                         <h3>Quem somos
-                        <small>Lorem lipsum avacalhadus</small>
+                        <small>Em desenvolvimento</small>
                         </h1>
                         <!-- /.row (nested) -->
                     </div>
@@ -250,29 +229,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Start Bootstrap</strong>
+                    <h4><strong>Los Pets</strong>
                     </h4>
-                    <p>3481 Melrose Place
-                        <br>Beverly Hills, CA 90210</p>
+                    <p>Faculdade Senac
+                        <br>Porto Alegre, RS 9123000</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-phone fa-fw"></i> (51) 3345-6789</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:comercial@lospets.com">comercial@lospets.com</a>
                         </li>
                     </ul>
                     <br>
                     <ul class="list-inline">
                         <li>
-                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                            <a href="www.facebook.com"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                            <a href="www.twitter.com"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
                         </li>
                     </ul>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; Your Website 2014</p>
+                    <p class="text-muted">Copyright &copy; Los Pets 2016</p>
                 </div>
             </div>
         </div>
