@@ -5,13 +5,12 @@
 	
 	$tag = $_POST["tag"];
 	
-	$SQL = "SELECT ani_latitude , ani_longitude FROM animal
+	$SQL = "SELECT ani_latitude , ani_longitude, ani_nome, raca.raca_nome FROM animal
 	INNER JOIN raca ON animal.ani_raca = raca.raca_id
-
 	INNER JOIN usuario ON animal.ani_usuario = usuario.user_id
 	INNER JOIN animal_tag ON animal.ani_id = animal_tag.anitag_animal
 	INNER JOIN tag ON animal_tag.anitag_tag = tag.tag_id
-	AND UPPER(tag.tag_tag) LIKE UPPER('%".$tag."%')";
+	WHERE UPPER(tag.tag_tag) LIKE UPPER('%".$tag."%')";
 	
 	
     
