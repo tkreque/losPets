@@ -96,9 +96,6 @@
     		    </form>	
 			</li>
             <li>
-                <a href="#portfolio" onclick=$( "#menu-close").click();>Portfolio</a>
-            </li>
-            <li>
                 <a href="#ultimosEventos" onclick=$( "#menu-close").click();>Últimos eventos</a>
             </li>
             <li>
@@ -113,7 +110,7 @@
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-left">
                         <h1>Los Pets
-                        <small>O seu pet está aqui!</small>
+                        <small>O seu pet se encontra aqui!</small>
                         </h1>
                         <!-- /.row (nested) -->
                     </div>
@@ -180,7 +177,11 @@
                   					map: map,
                   					title: location.ani_nome,
                   					infowindow: new google.maps.InfoWindow({
-                                        content: "<p>Nome: "+location.ani_nome+"<br />Raça: "+location.raca_nome+"</p>"
+                                        content: "<img src="+location.ani_imgpath+" style= 'border-radius: 50%; height:70px; width:70px;'></img><p><br />"
+                                        +"Nome: "+location.ani_nome+"<br />"
+                                        +"Raça: "+location.raca_nome+"<br />"
+                                        +"Animal: "+location.tipoani_nome+"<br />"
+                                        +"Porte: "+location.ani_porte+"</p>"
                                     })
                   				});
                   				markers_on_map.push(new_marker);
@@ -193,6 +194,19 @@
 				},
 				error: function(){console.log('erro')}
 			});	
+			
+			function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              } else {
+                alert("Geolocation is not supported by this browser.");
+              }
+            }
+            function showPosition(position) {
+              var lat = position.coords.latitude;
+              var lng = position.coords.longitude;
+              map.setCenter(new google.maps.LatLng(lat, lng));
+            }
       }
       </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGoNeSNZCJ5k6CmrmJ1hCB5WzW4DPka0&v=3&callback=initMap"></script>
@@ -202,7 +216,7 @@
          <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-left">
-                        <h2>Eventos
+                        <h2>Últimos Eventos
                         <small>Em desenvolvimento</small>
                         </h1>
                         <!-- /.row (nested) -->
