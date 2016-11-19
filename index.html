@@ -67,33 +67,32 @@
 				<input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar todos animais" name="btn_tag" onclick="BtnCon()"/>
             </li>
             <li>
-				<a href="#" onclick=$( "#menu-close").click();>Consulta por Porte</a>
-			    <form>	
-    				<select onchange="BtnConsultaPorte(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    					  <option value="P" name="porte1">Pequeno</option>
-    					  <option value="M" name="porte2">Médio</option>
-    					  <option value="G" name="porte3">Grande</option>
-    				</select>
-			    </form>	
-			</li>
-			<li>
-				<a href="#" onclick=$( "#menu-close").click();>Consulta por Tag</a>
-			    <form>	
-    				<select onchange="BtnConsultaTag(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    					  <option value="MANSO" name="tag1">Manso</option>
-    					  <option value="AGITADO" name="tag2">Agitado</option>
-    					  <option value="DORMINHOCO" name="tag3">Dorminhoco</option>
-    					  <option value="BRINCALHAO" name="tag4">Brincalhão</option>
-    					  <option value="FILHOTE" name="tag5">Filhote</option>
-    					  <option value="ADULTO" name="tag6">Adulto</option>
-    					  <option value="IDOSO" name="tag7">Idoso</option>
-    					  <option value="CASTRADO" name="tag8">Castrado</option>
-    					  <option value="PELUDO" name="tag9">Peludo</option>
-    					  <option value="TOSADO" name="tag10">Tosado</option>
-    					  <option value="BRAVO" name="tag11">Bravo</option>
-    					  <option value="ESPECIAL" name="tag12">Especial</option>
-    				</select>
-    		    </form>	
+				<a href="#" onclick=$( "#menu-close").click();>Consultas</a>
+			    <form>
+					 <select id="combo1" onchange="fnCombos(this.value)">
+						 <option value='' selected="selected">Selecionar por...</option>
+						 <option value='tag'>Por Tag</option>
+						 <option value='porte'>Por Porte</option>
+						 <option value='raca'>Por Raça</option>
+						 <option value='racatag'>Por Raça & Tag</option>
+					 </select>
+				</form>	 
+				<form>
+					 <select name="tag" id="combo2" hidden onchange="fnCombo2(this.value)">
+					 </select>	 
+				</form>
+				<form> 
+					 <select name="porte" id="combo3" hidden onchange="fnCombo3(this.value)">
+					 </select>
+				</form>
+				<form>	 
+					 <select name="raca" id="combo4" hidden onchange="fnCombo4(this.value)">
+					 </select>
+				</form>	
+				<form>	 
+					 <select name="avulso" id="combo5" hidden onchange="fnCombo5(this.value)">
+					 </select>
+				</form>	
 			</li>
             <li>
                 <a href="#ultimosEventos" onclick=$( "#menu-close").click();>Últimos eventos</a>
@@ -123,10 +122,13 @@
 
     <!-- Scripts das pesquisas -->
 	<script type="text/javascript" src="js/consultaTodos.js"></script>
-	<script type="text/javascript" src="js/consultaTag.js"></script>
-	<script type="text/javascript" src="js/consultaPorte.js"></script>
-	
- 
+	<!--script type="text/javascript" src="js/consultaTag.js"></script-->
+	<!--script type="text/javascript" src="js/consultaPorte.js"></script-->
+	<script type="text/javascript" src="js/fnCombo2.js"></script>
+	<script type="text/javascript" src="js/fnCombo3.js"></script>
+	<script type="text/javascript" src="js/fnCombo4.js"></script>
+	<script type="text/javascript" src="js/fnCombo5.js"></script>
+	<script type="text/javascript" src="js/fnMontaCombos.js"></script> 
 
     <!-- Map -->
     <div id="map"></div>
@@ -157,7 +159,7 @@
            	$.ajax({
 				type:'post',		//Definimos o m�todo HTTP usado
 				dataType: 'json',	//Definimos o tipo de retorno
-				url: 'getDados.php',//Definindo o arquivo onde ser�o buscados os dados
+				url: 'php/getDados.php',//Definindo o arquivo onde ser�o buscados os dados
 				success: function(dados){
 				    
 				    console.log(dados);
@@ -277,6 +279,8 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+	<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

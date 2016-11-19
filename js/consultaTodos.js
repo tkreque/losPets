@@ -4,7 +4,7 @@ function BtnCon()
     		
 			
 			var request = $.ajax({
-				url: "getAnimais.php",
+				url: "php/getAnimais.php",
 				type: "POST",
 				dataType: "json"
 			}).done(function(dados) {
