@@ -56,11 +56,11 @@
             <li class="sidebar-brand">
                 <a href="#top" onclick=$( "#menu-close").click();>Los Pets</a>
             </li>
-          <li>
-                <a href="index.html" onclick=$( "#menu-close").click();>Home</a>
+            <li>
+                <a href="#top" onclick=$( "#menu-close").click();>Home</a>
             </li>
             <li>
-				<a href="incluiranimal.html" onclick=$( "#menu-close").click();>Incluir Animal</a>
+				<a href="#" onclick=$( "#menu-close").click();>Incluir Animal</a>
             </li>
             <li>
 				<a href="#" onclick=$( "#menu-close").click();>Mostrar todos os Animais</a>
@@ -77,7 +77,7 @@
 						 <option value='mult'>Múltipla seleção...</option>
 					 </select>
 				</form>	 
-				<form id="frm2">
+				<form id="frm2" hidden>
 					 <select name="tag" id="combo2" hidden onchange="fnCombo2(this.value)"></select>
 				</form>
 				<form id="frm3"> 

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Los Pets</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        #map {
+            height: 100%;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            height: 60px;
+            background: none;
+            background-color: #337ab7;
+        }
+        
+        h1 small {
+            color: white;
+        }
+    </style>
+
+    </style>
+
+    <script type="text/javascript">
+function validaCampo()
+{
+if(document.cadastro.nome.value=="")
+	{
+	alert("O Campo nome é obrigatorio!");
+	return false;
+	}
+else
+	if(document.cadastro.usuario.value=="")
+	{
+	alert("O Campo usuario é obrigatorio!");
+	return false;
+	}
+else
+	if(document.cadastro.raca.value=="")
+	{
+	alert("O Campo raca é obrigatorio!");
+	return false;
+	}
+else
+	if(document.cadastro.situacao.value=="")
+	{
+	alert("O Campo situacao é obrigatorio!");
+	return false;
+	}
+else
+	if(document.cadastro.porte.value=="")
+	{
+	alert("O Campo porte é obrigatorio!");
+	return false;
+	}
+return true;
+}
+</script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top" onclick=$( "#menu-close").click();>Los Pets</a>
+            </li>
+            <li>
+                <a href="index.html" onclick=$( "#menu-close").click();>Home</a>
+            </li>
+            <li>
+                <a href="incluiranimal.html" onclick=$( "#menu-close").click();>Incluir Animal</a>
+            </li>
+            <li>
+                <a href="#" onclick=$( "#menu-close").click();>Mostrar todos os Animais</a>
+                <input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar todos animais" name="btn_tag" onclick="BtnCon()"
+                />
+            </li>
+            <li>
+                <a href="#" onclick=$( "#menu-close").click();>Consulta por Porte</a>
+                <form>
+                    <select onchange="BtnConsultaPorte(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    					  <option value="P" name="porte1">Pequeno</option>
+    					  <option value="M" name="porte2">Médio</option>
+    					  <option value="G" name="porte3">Grande</option>
+    				</select>
+                </form>
+            </li>
+            <li>
+                <a href="#" onclick=$( "#menu-close").click();>Consulta por Tag</a>
+                <form>
+                    <select onchange="BtnConsultaTag(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    					  <option value="MANSO" name="tag1">Manso</option>
+    					  <option value="AGITADO" name="tag2">Agitado</option>
+    					  <option value="DORMINHOCO" name="tag3">Dorminhoco</option>
+    					  <option value="BRINCALHAO" name="tag4">Brincalhão</option>
+    					  <option value="FILHOTE" name="tag5">Filhote</option>
+    					  <option value="ADULTO" name="tag6">Adulto</option>
+    					  <option value="IDOSO" name="tag7">Idoso</option>
+    					  <option value="CASTRADO" name="tag8">Castrado</option>
+    					  <option value="PELUDO" name="tag9">Peludo</option>
+    					  <option value="TOSADO" name="tag10">Tosado</option>
+    					  <option value="BRAVO" name="tag11">Bravo</option>
+    					  <option value="ESPECIAL" name="tag12">Especial</option>
+    				</select>
+                </form>
+            </li>
+            <li>
+                <a href="#ultimosEventos" onclick=$( "#menu-close").click();>Últimos eventos</a>
+            </li>
+            <li>
+                <a href="#about" onclick=$( "#menu-close").click();>Quem somos</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header id="header" class="header bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-left">
+                    <h1>Los Pets
+                        <small>O seu pet se encontra aqui!</small>
+                    </h1>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </header>
+
+    <!-- Scripts das pesquisas -->
+    <script type="text/javascript" src="js/consultaTodos.js"></script>
+    <script type="text/javascript" src="js/consultaTag.js"></script>
+    <script type="text/javascript" src="js/consultaPorte.js"></script>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Adicionando um Animal</h2>
+        </div>
+        <!-- fim .panel-heading -->
+
+        <div class="panel-body">
+            <!-- Forumulario -->
+            <div class="col-md-6 col-md-offset-3">
+                <form id="cadastro" name="cadastro" method="post" action="php\cadastro.php" onsubmit="return validaCampo(); return false;">
+                    Nome
+                    <input type="Text" name="nome" id="nome" size="40" class="form-control"><br>
+                     Raça 
+                     <select onchange="BtnConsultaTag(this.value)" class="form-control" name="raca" id="raca"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    					  <option value="1" name="tag1">Manso</option>
+    				</select><br> 
+                    Porte
+                    <input type="Text" size="40" class="form-control" name="porte" id="porte"><br>
+                     Situcação
+                    <select onchange="BtnConsultaTag(this.value)" class="form-control" name="situacao" id="situacao"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    					  <option value="1" name="tag1">Manso</option>
+    				</select><br>
+                     Usuario
+                    <input type="Text"  size="40" class="form-control" name="usuario" id="usuario"><br> 
+                    Latitude
+                    <input type="Text"  size="40" class="form-control" name="Latitude" id="Latitude"><br>
+                     Longitude
+                    <input type="Text"  size="40" class="form-control" name="Longitude" id="Longitude"><br>
+
+                    <label for="exampleInputFile">Imagem</label>
+                    <input type="file" id="exampleInputFile" class="btn btn-default">
+                    <br>
+
+                    <input type="Submit" value="Enviar " class="btn btn-default">
+                    <input type="Reset" value="Limpar Dados" class="btn btn-default">
+
+            </div>
+            <!-- Footer -->
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1 text-center">
+                            <h4><strong>Los Pets</strong>
+                            </h4>
+                            <p>Faculdade Senac
+                                <br>Porto Alegre, RS 9123000</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-phone fa-fw"></i> (51) 3345-6789</li>
+                                <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:comercial@lospets.com">comercial@lospets.com</a>
+                                </li>
+                            </ul>
+                            <br>
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="www.facebook.com"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                                </li>
+                                <li>
+                                    <a href="www.twitter.com"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                                </li>
+                            </ul>
+                            <hr class="small">
+                            <p class="text-muted">Copyright &copy; Los Pets 2016</p>
+                        </div>
+                    </div>
+                </div>
+                <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+            </footer>
+
+            <!-- jQuery -->
+            <script src="js/jquery.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="js/bootstrap.min.js"></script>
+
+            <!-- Custom Theme JavaScript -->
+            <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    //#to-top button appears after scrolling
+    var fixed = false;
+    $(document).scroll(function() {
+        if ($(this).scrollTop() > 250) {
+            if (!fixed) {
+                fixed = true;
+                // $('#to-top').css({position:'fixed', display:'block'});
+                $('#to-top').show("slow", function() {
+                    $('#to-top').css({
+                        position: 'fixed',
+                        display: 'block'
+                    });
+                });
+            }
+        } else {
+            if (fixed) {
+                fixed = false;
+                $('#to-top').hide("slow", function() {
+                    $('#to-top').css({
+                        display: 'none'
+                    });
+                });
+            }
+        }
+    });
+    // Disable Google Maps scrolling
+    // See http://stackoverflow.com/a/25904582/1607849
+    // Disable scroll zooming and bind back the click event
+    var onMapMouseleaveHandler = function(event) {
+        var that = $(this);
+        that.on('click', onMapClickHandler);
+        that.off('mouseleave', onMapMouseleaveHandler);
+        that.find('iframe').css("pointer-events", "none");
+    }
+    var onMapClickHandler = function(event) {
+            var that = $(this);
+            // Disable the click handler until the user leaves the map area
+            that.off('click', onMapClickHandler);
+            // Enable scrolling zoom
+            that.find('iframe').css("pointer-events", "auto");
+            // Handle the mouse leave event
+            that.on('mouseleave', onMapMouseleaveHandler);
+        }
+        // Enable map zooming with mouse scroll when the user clicks the map
+    $('.map').on('click', onMapClickHandler);
+    </script>
+
+</body>
+
+</html>
