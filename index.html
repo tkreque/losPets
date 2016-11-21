@@ -68,31 +68,51 @@
             </li>
             <li>
 				<a href="#" onclick=$( "#menu-close").click();>Consultas</a>
-			    <form>
+			    <form id="frm1">
 					 <select id="combo1" onchange="fnCombos(this.value)">
 						 <option value='' selected="selected">Selecionar por...</option>
 						 <option value='tag'>Por Tag</option>
 						 <option value='porte'>Por Porte</option>
 						 <option value='raca'>Por Raça</option>
-						 <option value='racatag'>Por Raça & Tag</option>
+						 <option value='mult'>Múltipla seleção...</option>
 					 </select>
 				</form>	 
-				<form>
-					 <select name="tag" id="combo2" hidden onchange="fnCombo2(this.value)">
-					 </select>	 
+				<form id="frm2">
+					 <select name="tag" id="combo2" hidden onchange="fnCombo2(this.value)"></select>
 				</form>
-				<form> 
-					 <select name="porte" id="combo3" hidden onchange="fnCombo3(this.value)">
-					 </select>
+				<form id="frm3"> 
+					 <select name="porte" id="combo3" hidden onchange="fnCombo3(this.value)"></select>
 				</form>
-				<form>	 
-					 <select name="raca" id="combo4" hidden onchange="fnCombo4(this.value)">
-					 </select>
+				<form id="frm4">	 
+					 <select name="raca" id="combo4" hidden onchange="fnCombo4(this.value)"></select>
+				</form>
+				<form id="frm5">	 
+					 <select name="avulso" id="combo5" hidden onchange="fnCombo5(this.value)"></select>
 				</form>	
-				<form>	 
-					 <select name="avulso" id="combo5" hidden onchange="fnCombo5(this.value)">
+				<form id="frm6" hidden>	
+				<div class="col-lg-10 col-lg-offset-1 text-left">
+					<a href="#top" onclick=$( "#menu-close").click();>Selecionar...</a>
+				</div>
+				<div class="col-lg-10 col-lg-offset-1 text-left">
+					 <select name="tagM" id="combo6">
+						<option value='' selected="selected">Tag 1</option>
+						<option value='' selected="selected">Tag 2</option>
 					 </select>
-				</form>	
+				</div>	 
+				<div class="col-lg-10 col-lg-offset-1 text-left">	 
+					 <select name="porteM" id="combo7">
+						<option value='' selected="selected">Porte 1</option>
+						<option value='' selected="selected">Porte 2</option>
+					 </select>
+				</div>	 
+				<div class="col-lg-10 col-lg-offset-1 text-left">	 
+					 <select name="racaM" id="combo8">
+						<option value='' selected="selected">Raça 1</option>
+						<option value='' selected="selected">Raça 2</option>
+					 </select>
+				</div>	 
+					 <input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar..." name="btn_mult" onclick="fechaMult()"/>
+				</form>
 			</li>
             <li>
                 <a href="#ultimosEventos" onclick=$( "#menu-close").click();>Últimos eventos</a>
@@ -121,13 +141,7 @@
      </header>
 
     <!-- Scripts das pesquisas -->
-	<script type="text/javascript" src="js/consultaTodos.js"></script>
-	<!--script type="text/javascript" src="js/consultaTag.js"></script-->
-	<!--script type="text/javascript" src="js/consultaPorte.js"></script-->
-	<script type="text/javascript" src="js/fnCombo2.js"></script>
-	<script type="text/javascript" src="js/fnCombo3.js"></script>
-	<script type="text/javascript" src="js/fnCombo4.js"></script>
-	<script type="text/javascript" src="js/fnCombo5.js"></script>
+	<script type="text/javascript" src="js/Consultas.js"></script>
 	<script type="text/javascript" src="js/fnMontaCombos.js"></script> 
 
     <!-- Map -->
