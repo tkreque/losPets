@@ -84,10 +84,62 @@ else
 	}
 return true;
 }
+
+	    var combo = "<option value=''>Selecione...</option>";
+	var combosit = "<option value=''>Selecione...</option>";
+	var comboboxRaca, comboboxSit;
+	var frm;
+	
+function carregaRaca(){
+
+	comboboxRaca = $("#raca");
+		
+	var request = $.ajax({
+		url: "php/getDadosRACA.php",
+		type: "GET",
+	}).done(function(arrayRetorno) {
+		var dados = new Array();
+		
+		var dados = jQuery.parseJSON(arrayRetorno);
+	
+		for(i=0;i<dados.length;i++){			
+			combo +="<option value="+ dados[i].raca_id +">" + dados[i].raca_nome +"</option>";
+		}				
+			comboboxRaca.append(combo);
+			comboboxRaca.show();
+			
+			
+	});		
+						
+	comboboxSit = $("#situacao");
+		
+	var request = $.ajax({
+		url: "php/getDadosSit.php",
+		type: "GET",
+	}).done(function(arrayRetorno) {
+	
+		var dados = new Array();
+		
+		var dados = jQuery.parseJSON(arrayRetorno);
+		console.log("==>" + dados[1]);
+			
+			
+		for(i=0;i<dados.length;i++){			
+			combosit +="<option value=" + dados[i].sit_id + ">" + dados[i].sit_nome +"</option>";
+		}				
+		comboboxSit.append(combosit);
+		comboboxSit.show();
+			
+	});		
+		
+}
+
+	    
+	    
 </script>
 </head>
 
-<body>
+<body onload="carregaRaca()">
     <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
@@ -177,18 +229,17 @@ return true;
         <div class="panel-body">
             <!-- Forumulario -->
             <div class="col-md-6 col-md-offset-3">
-                <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
+              <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;" >
                     Nome
                     <input type="Text" name="nome" id="nome" size="40" class="form-control"><br>
                      Raça 
-                     <select onchange="BtnConsultaTag(this.value)" class="form-control" name="raca" id="raca"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    					  <option value="1" name="tag1">Manso</option>
-    				</select><br> 
+                     <select class="form-control" name="raca" id="raca" > <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+      				</select><br> 
                     Porte
                     <input type="Text" size="40" class="form-control" name="porte" id="porte"><br>
                      Situcação
-                    <select onchange="BtnConsultaTag(this.value)" class="form-control" name="situacao" id="situacao"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    					  <option value="1" name="tag1">Manso</option>
+                    <select class="form-control" name="situacao" id="situacao" onLoad="carregaSit()"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    			
     				</select><br>
                      Usuario
                     <input type="Text"  size="40" class="form-control" name="usuario" id="usuario"><br> 
@@ -203,6 +254,7 @@ return true;
 
                     <input type="Submit" value="Enviar " class="btn btn-default">
                     <input type="Reset" value="Limpar Dados" class="btn btn-default">
+</form>
 
             </div>
             <!-- Footer -->
