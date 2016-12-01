@@ -8,28 +8,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Los Pets</title>
-    <!-- Custom Fonts -->
-
-
+     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/fnMontaCombos.js"></script>
-    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
-    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="jquery-ui.custom.min.js"></script>
     <script type="text/javascript" src="mapa.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGoNeSNZCJ5k6CmrmJ1hCB5WzW4DPka0&v=3&sensor=false"></script>
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <style type="text/css">
         #map {
             height: 100%;
@@ -193,46 +182,6 @@ function carregaRaca(){
                 <a href="index.html" onclick=$( "#menu-close").click();>Home</a>
             </li>
             <li>
-                <a href="incluiranimal.html" onclick=$( "#menu-close").click();>Incluir Animal</a>
-            </li>
-            <li>
-                <a href="#" onclick=$( "#menu-close").click();>Mostrar todos os Animais</a>
-                <input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar todos animais" name="btn_tag" onclick="BtnCon()"
-                />
-            </li>
-            <li>
-                <a href="#" onclick=$( "#menu-close").click();>Consulta por Porte</a>
-                <form>
-                    <select onchange="BtnConsultaPorte(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    					  <option value="P" name="porte1">Pequeno</option>
-    					  <option value="M" name="porte2">Médio</option>
-    					  <option value="G" name="porte3">Grande</option>
-    				</select>
-                </form>
-            </li>
-            <li>
-                <a href="#" onclick=$( "#menu-close").click();>Consulta por Tag</a>
-                <form>
-                    <select onchange="BtnConsultaTag(this.value)"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    					  <option value="MANSO" name="tag1">Manso</option>
-    					  <option value="AGITADO" name="tag2">Agitado</option>
-    					  <option value="DORMINHOCO" name="tag3">Dorminhoco</option>
-    					  <option value="BRINCALHAO" name="tag4">Brincalhão</option>
-    					  <option value="FILHOTE" name="tag5">Filhote</option>
-    					  <option value="ADULTO" name="tag6">Adulto</option>
-    					  <option value="IDOSO" name="tag7">Idoso</option>
-    					  <option value="CASTRADO" name="tag8">Castrado</option>
-    					  <option value="PELUDO" name="tag9">Peludo</option>
-    					  <option value="TOSADO" name="tag10">Tosado</option>
-    					  <option value="BRAVO" name="tag11">Bravo</option>
-    					  <option value="ESPECIAL" name="tag12">Especial</option>
-    				</select>
-                </form>
-            </li>
-            <li>
-                <a href="#ultimosEventos" onclick=$( "#menu-close").click();>Últimos eventos</a>
-            </li>
-            <li>
                 <a href="#about" onclick=$( "#menu-close").click();>Quem somos</a>
             </li>
         </ul>
@@ -291,7 +240,9 @@ function carregaRaca(){
                     <input type="hidden" size="40" class="form-control" name="txtLongitude" id="txtLongitude"><br>
                     <label for="foto">Imagem</label>
                     <input type="file" id="foto" name="foto" class="btn btn-default">
-                     <br>
+                    
+                    <br>
+
                     <input type="Submit" value="Enviar " class="btn btn-default">
                     <input type="Reset" value="Limpar Dados" class="btn btn-default">
 
