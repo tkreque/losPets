@@ -7,17 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Los Pets</title>
+    <!-- Custom Fonts -->
 
+
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/fnMontaCombos.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-        type="text/css">
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="mapa.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGoNeSNZCJ5k6CmrmJ1hCB5WzW4DPka0&v=3&sensor=false"></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,9 +51,32 @@
         h1 small {
             color: white;
         }
+        
+        .ui-autocomplete {
+            background: #fff;
+            border-top: 1px solid #ccc;
+            cursor: pointer;
+            font: 15px 'Open Sans', Arial;
+            margin-left: 3px;
+            width: 600px !important;
+            position: fixed;
+        }
+        
+        .ui-autocomplete .ui-menu-item {
+            list-style: none outside none;
+            padding: 7px 0 9px 10px;
+        }
+        
+        .ui-autocomplete .ui-menu-item:hover {
+            background: #eee
+        }
+        
+        .ui-autocomplete .ui-corner-all {
+            color: #666 !important;
+            display: block;
+        }
     </style>
 
-    </style>
 
     <script type="text/javascript">
 function validaCampo()
@@ -82,10 +110,22 @@ else
 	alert("O Campo porte é obrigatorio!");
 	return false;
 	}
+    else
+	if(document.cadastro.Latitude.value=="")
+	{
+	alert("Verifique o Endereço!");
+	return false;
+	}
+    	if(document.cadastro.Longitude.value=="")
+	{
+	alert("Verifique o Endereço!");
+	return false;
+	}
+    
 return true;
 }
 
-	    var combo = "<option value=''>Selecione...</option>";
+	var combo = "<option value=''>Selecione...</option>";
 	var combosit = "<option value=''>Selecione...</option>";
 	var comboboxRaca, comboboxSit;
 	var frm;
@@ -134,8 +174,9 @@ function carregaRaca(){
 		
 }
 
-	    
-	    
+
+
+
 </script>
 </head>
 
@@ -229,73 +270,70 @@ function carregaRaca(){
         <div class="panel-body">
             <!-- Forumulario -->
             <div class="col-md-6 col-md-offset-3">
-              <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;" >
-                    Nome
-                    <input type="Text" name="nome" id="nome" size="40" class="form-control"><br>
-                     Raça 
-                     <select class="form-control" name="raca" id="raca" > <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-      				</select><br> 
-                    Porte
-                    <input type="Text" size="40" class="form-control" name="porte" id="porte"><br>
-                     Situcação
-                    <select class="form-control" name="situacao" id="situacao" onLoad="carregaSit()"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
-    			
-    				</select><br>
-                     Usuario
-                    <input type="Text"  size="40" class="form-control" name="usuario" id="usuario"><br> 
-                    Latitude
-                    <input type="Text"  size="40" class="form-control" name="Latitude" id="Latitude"><br>
-                     Longitude
-                    <input type="Text"  size="40" class="form-control" name="Longitude" id="Longitude"><br>
-
-                    <label for="exampleInputFile">Imagem</label>
-                    <input type="file" id="exampleInputFile" class="btn btn-default">
+                <form id="cadastro" name="cadastro" method="post" action="cadastro.php" onsubmit="return validaCampo(); return false;">
+                    <label> Nome</label>
+                    <input type="Text" name="nome" id="nome" size="40" class="form-control">
                     <br>
-
+                    <label>Raça</label>
+                    <select class="form-control" name="raca" id="raca"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+      				</select>
+                    <br>
+                    <label> Porte</label>
+                    <input type="Text" size="40" class="form-control" name="porte" id="porte">
+                    <br>
+                    <label>Situcação</label>
+                    <select class="form-control" name="situacao" id="situacao" onLoad="carregaSit()"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
+    				</select>
+                    <br>
+                    <label> Endereço</label>
+                    <input type="Text" size="40" class="form-control" name="txtEndereco" id="txtEndereco"><br>
+                    <input type="hidden" size="40" class="form-control" name="txtLatitude" id="txtLatitude"><br>
+                    <input type="hidden" size="40" class="form-control" name="txtLongitude" id="txtLongitude"><br>
+                    <label for="foto">Imagem</label>
+                    <input type="file" id="foto" name="foto" class="btn btn-default">
+                     <br>
                     <input type="Submit" value="Enviar " class="btn btn-default">
                     <input type="Reset" value="Limpar Dados" class="btn btn-default">
-</form>
 
             </div>
-            <!-- Footer -->
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 col-lg-offset-1 text-center">
-                            <h4><strong>Los Pets</strong>
-                            </h4>
-                            <p>Faculdade Senac
-                                <br>Porto Alegre, RS 9123000</p>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-phone fa-fw"></i> (51) 3345-6789</li>
-                                <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:comercial@lospets.com">comercial@lospets.com</a>
-                                </li>
-                            </ul>
-                            <br>
-                            <ul class="list-inline">
-                                <li>
-                                    <a href="www.facebook.com"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                                </li>
-                                <li>
-                                    <a href="www.twitter.com"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                                </li>
-                            </ul>
-                            <hr class="small">
-                            <p class="text-muted">Copyright &copy; Los Pets 2016</p>
-                        </div>
+        </div>
+
+        <div id="mapa"></div>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1 text-center">
+                        <h4><strong>Los Pets</strong>
+                        </h4>
+                        <p>Faculdade Senac
+                            <br>Porto Alegre, RS 9123000</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-phone fa-fw"></i> (51) 3345-6789</li>
+                            <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:comercial@lospets.com">comercial@lospets.com</a>
+                            </li>
+                        </ul>
+                        <br>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="www.facebook.com"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                            </li>
+                            <li>
+                                <a href="www.twitter.com"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                            </li>
+                        </ul>
+                        <hr class="small">
+                        <p class="text-muted">Copyright &copy; Los Pets 2016</p>
                     </div>
                 </div>
-                <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-            </footer>
+            </div>
+            <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+        </footer>
 
-            <!-- jQuery -->
-            <script src="js/jquery.js"></script>
 
-            <!-- Bootstrap Core JavaScript -->
-            <script src="js/bootstrap.min.js"></script>
 
-            <!-- Custom Theme JavaScript -->
-            <script>
+        <!-- Custom Theme JavaScript -->
+        <script>
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
