@@ -116,7 +116,8 @@ return true;
 
 	var combo = "<option value=''>Selecione...</option>";
 	var combosit = "<option value=''>Selecione...</option>";
-	var comboboxRaca, comboboxSit;
+    var combotipo = "<option value=''>Selecione...</option>";
+	var comboboxRaca, comboboxSit, comboboxTipo;
 	var frm;
 	
 function carregaRaca(){
@@ -124,7 +125,7 @@ function carregaRaca(){
 	comboboxRaca = $("#raca");
 		
 	var request = $.ajax({
-		url: "php/getDadosRACA.php",
+		url: "php/getDadosRACAcombo.php",
 		type: "GET",
 	}).done(function(arrayRetorno) {
 		var dados = new Array();
@@ -143,7 +144,7 @@ function carregaRaca(){
 	comboboxSit = $("#situacao");
 		
 	var request = $.ajax({
-		url: "php/getDadosSit.php",
+		url: "php/getDadosSitcombo.php",
 		type: "GET",
 	}).done(function(arrayRetorno) {
 	
@@ -161,6 +162,26 @@ function carregaRaca(){
 			
 	});		
 		
+    	comboboxTipo = $("#tipo");
+		
+	var request = $.ajax({
+		url: "php/getDadosTIPOcombo.php",
+		type: "GET",
+	}).done(function(arrayRetorno) {
+	
+		var dados = new Array();
+		
+		var dados = jQuery.parseJSON(arrayRetorno);
+		console.log("==>" + dados[1]);
+			
+			
+		for(i=0;i<dados.length;i++){			
+			combotipo +="<option value=" + dados[i].tipoani_id + ">" + dados[i].tipoani_nome +"</option>";
+		}				
+		comboboxTipo.append(combotipo);
+		comboboxTipo.show();
+			
+	});		    
 }
 
 
@@ -229,6 +250,7 @@ function carregaRaca(){
                     <br>
                     <label> Porte</label>
                     <input type="Text" size="40" class="form-control" name="porte" id="porte">
+                    
                     <br>
                     <label>Situcação</label>
                     <select class="form-control" name="situacao" id="situacao" onLoad="carregaSit()"> <!-- Criei o combo manulamente, vou ver como fazer dinâmico -->
@@ -236,11 +258,11 @@ function carregaRaca(){
                     <br>
                     <label> Endereço</label>
                     <input type="Text" size="40" class="form-control" name="txtEndereco" id="txtEndereco"><br>
+                    <label for="foto">Imagem</label>
+                    <input type="file"  name="foto" class="btn btn-default">
+                    
                     <input type="hidden" size="40" class="form-control" name="txtLatitude" id="txtLatitude"><br>
                     <input type="hidden" size="40" class="form-control" name="txtLongitude" id="txtLongitude"><br>
-                    <label for="foto">Imagem</label>
-                    <input type="file" id="foto" name="foto" class="btn btn-default">
-                    
                     <br>
 
                     <input type="Submit" value="Enviar " class="btn btn-default">
