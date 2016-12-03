@@ -2,7 +2,7 @@
 
    
 	 //Conectando ao banco de dados
-     $con = new mysqli("localhost", "root", "usbw", "pets");
+     $con = new mysqli("localhost", "root", "", "pets");
     if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
     
     //Consultando banco de dados
