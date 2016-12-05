@@ -1,23 +1,21 @@
 <?php
 
-    //Conectando ao banco de dados
-    $mysqli = new mysqli("localhost", "root", "usbw", "pets");
-    if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
-    
+    //Conectando ao banco de dados    
+	include "conexao.php";
+	
     //Consultando banco de dados
-	$query = "SELECT distinct ani_porte FROM animal
-	INNER JOIN raca ON animal.ani_raca = raca.raca_id
-	INNER JOIN usuario ON animal.ani_usuario = usuario.user_id";
+	$query = "SELECT distinct ani_porte FROM animal";
+	//INNER JOIN raca ON animal.ani_raca = raca.raca_id
+	//INNER JOIN usuario ON animal.ani_usuario = usuario.user_id";
  
-	$result = $mysqli->query($query);
-
-
-		while ($row = $result->fetch_array(MYSQLI_ASSOC)){
-			$teste = implode(',',$row);
-			$arrayRetorno[] = $teste;
-		}   
+ // -- Variavel $con é retorno de conexao.php	
+	$retorno = mysqli_query($con,$query);
+	
+	 while($resultado = mysqli_fetch_assoc($retorno)){
+        $vetor[] = array_map('utf8_encode', $resultado); 
+    }    
     
     //Passando vetor em forma de json
-    echo json_encode($arrayRetorno);
-	
+    echo json_encode($vetor);
+
 ?>

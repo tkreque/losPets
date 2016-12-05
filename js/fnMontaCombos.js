@@ -19,7 +19,8 @@ function fnCombos(valueParam){
 			var tam = arrayRetorno.length;
 				console.log(resultado);
 			for(i=0;i<resultado.length;i++){
-				combo +="<option value="+ resultado[i] +">" + resultado[i]+"</option>";
+				
+				combo +="<option value="+ resultado[i].TAG_TAG +">" + resultado[i].TAG_TAG+"</option>";
 			}
 				combobox.append(combo);
 				combobox.show();
@@ -43,19 +44,24 @@ function fnCombos(valueParam){
 			url: "php/getDadosPORTE.php",
 			type: "GET",
 		}).done(function(arrayRetorno) {
+			
 			var resultado = $.parseJSON(arrayRetorno);
 			var tam = arrayRetorno.length;
 				console.log(resultado);
 			for(i=0;i<resultado.length;i++){
+				
 				var aux="";
-				if(resultado[i] == "P"){
+				if(resultado[i].ani_porte == "P"){
 					aux = "PEQUENO";
-				}else if(resultado[i] == "M"){
+				}else if(resultado[i].ani_porte == "M"){
 					aux = "MÉDIO";	
-				}else if(resultado[i] == "G"){
+				}else if(resultado[i].ani_porte == "G"){
 					aux = "GRANDE";
-				}			
-				combo +="<option value="+ resultado[i] +">" + aux +"</option>";
+				}else{
+					aux = resultado[i].ani_porte;
+					aux = aux.toUpperCase();
+				}	
+				combo +="<option value="+ resultado[i].ani_porte +">" + aux +"</option>";
 			}
 				combobox.append(combo);
 				combobox.show();
@@ -82,7 +88,7 @@ function fnCombos(valueParam){
 			var tam = arrayRetorno.length;
 				console.log(resultado);
 			for(i=0;i<resultado.length;i++){			
-				combo +="<option value="+ resultado[i] +">" + resultado[i] +"</option>";
+				combo +="<option value="+ resultado[i].RACA_NOME +">" + resultado[i].RACA_NOME +"</option>";
 			}				
 				combobox.append(combo);
 				combobox.show();

@@ -1,21 +1,19 @@
 <?php
 
-    //Conectando ao banco de dados
-    $mysqli = new mysqli("localhost", "root", "usbw", "pets");
-    if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
+    //Conectando ao banco de dados   
+	include "conexao.php";
     
     //Consultando banco de dados
 	$query = "SELECT TAG_TAG FROM TAG";
  
-	$result = $mysqli->query($query);
+ // -- Variavel $con é retorno de conexao.php	
+	$retorno = mysqli_query($con,$query);
 
-
-		while ($row = $result->fetch_array(MYSQLI_ASSOC)){
-			$teste = implode(',',$row);
-			$arrayRetorno[] = $teste;
-		}   
+	 while($resultado = mysqli_fetch_assoc($retorno)){
+        $vetor[] = array_map('utf8_encode', $resultado); 
+    }    
     
     //Passando vetor em forma de json
-    echo json_encode($arrayRetorno);
+    echo json_encode($vetor);
 	
 ?>
