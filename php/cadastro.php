@@ -16,7 +16,9 @@ $latitude	= $_POST ["txtLatitude"];
 $longitude	= $_POST ["txtLongitude"];
 
 //-------------------------------------------------------
- $foto = $_POST["foto"];
+ $foto = $_FILES["foto"];
+ $error = [];
+ //VAR_DUMP($_FILES);
  
  if (!empty($foto["name"])) {      
     // Largura máxima em pixels
@@ -24,7 +26,7 @@ $longitude	= $_POST ["txtLongitude"];
     // Altura máxima em pixels
     $altura = 180;
     // Tamanho máximo do arquivo em bytes
-    $tamanho = 1000;
+    $tamanho = 100000;
     // Verifica se o arquivo é uma imagem
     if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto["type"])){
         $error[1] = "Isso não é uma imagem.";
@@ -49,13 +51,14 @@ $longitude	= $_POST ["txtLongitude"];
         preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto["name"], $ext);
         // Gera um nome único para a imagem
         $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+		echo "--> ".$nome_imagem;
         // Caminho de onde ficará a imagem
-        $caminho_imagem = "img/" . $nome_imagem;
+        $caminho_imagem = "../img/" . $nome_imagem;
         // Faz o upload da imagem para seu respectivo caminho
         move_uploaded_file($foto["tmp_name"], $caminho_imagem);  
 
 		
-    $query = "INSERT INTO `animal` (`ani_id` ,  `ani_nome` ,  `ani_raca` ,  `ani_porte` ,  `ani_situacao` ,  `ani_usuario` ,  `ani_latitude` ,  `ani_longitude`,`ani_imgpath`) VALUES ('', '$nome', '$raca', '$porte', '$situacao', '$usuario', '$latitude', '$longitude',,'$nome_imagem')";
+    $query = "INSERT INTO `animal` (`ani_id` ,  `ani_nome` ,  `ani_raca` ,  `ani_porte` ,  `ani_situacao` ,  `ani_usuario` ,  `ani_latitude` ,  `ani_longitude`,`ani_imgpath`) VALUES ('', '$nome', '$raca', '$porte', '$situacao', '$usuario', '$latitude', '$longitude','$nome_imagem')";
     
 	$resultado = mysqli_query($con,$query);
 	
@@ -64,7 +67,7 @@ $longitude	= $_POST ["txtLongitude"];
 			}else{
 				echo"<script> console.log('Deu errado');</script>" . $query;
 			}
-            header("Location: ../index.html");
+            //header("Location: ../index.html");
         } else {
             echo "Erro, não possível inserir no banco de dados";
         }
@@ -88,7 +91,7 @@ $longitude	= $_POST ["txtLongitude"];
 		echo"<script> console.log('Deu errado');</script>" . $query;
 	}
 	
-        header("Location: ../index.html");
+    header("Location: ../index.html");
 
     mysqli_close($con); //fecha conexão com banco de dados
 }
