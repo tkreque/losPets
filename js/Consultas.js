@@ -204,5 +204,23 @@ function BtnConsultaPorte(porte) {
 
 function BtnPerfil(id) {
 	console.log(id);
-	window.location.replace("https://stackoverflow.com");
+	var request = $.ajax({
+		url: "php/getAnimal.php",
+		type: "POST",
+		data: "animal=" + id,
+		dataType: "json"
+	}).done(function(dados) {
+		console.log(dados);
+		
+		var html = "<html><head>"+
+				"<title>"+dados[0].ani_nome+"</title>" +
+				"</head>"+
+				"<body>"+dados[0].ani_nome+"<br />"+dados[0].raca_nome+"</body>"+
+				"</html>";
+		
+		console.log(html);
+		var opened = window.open("");
+		opened.document.write(html);
+		//window.location.replace("https://stackoverflow.com");
+	});
 }

@@ -108,6 +108,7 @@ function setMarkers(gp) {
                     var marker_lat_lng = new google.maps.LatLng(location.ani_latitude, location.ani_longitude);
                     var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng);
                     var ic = '';
+                    var botao = '';
                     switch (location.sit_nome) {
                         case 'ADOCAO':
                             switch (location.tipoani_nome) {
@@ -129,6 +130,7 @@ function setMarkers(gp) {
                                 default:
                                     ic = 'img/icons/blue/zoo.png';
                             }
+                            botao = "<input class='btn btn-primary btn-block' type='button' value='Eu quero adotar' name='btn_perfil' onclick='BtnPerfil(" + location.ani_id + ")' />"
                             break;
                         case 'ACHADO':
                             switch (location.tipoani_nome) {
@@ -150,6 +152,7 @@ function setMarkers(gp) {
                                 default:
                                     ic = 'img/icons/green/zoo.png';
                             }
+                            botao = "<input class='btn btn-primary btn-block' type='button' value='É Meu' name='btn_perfil' onclick='BtnPerfil(" + location.ani_id + ")' />"
                             break;
                         case 'PERDIDO':
                             switch (location.tipoani_nome) {
@@ -171,6 +174,7 @@ function setMarkers(gp) {
                                 default:
                                     ic = 'img/icons/red/zoo.png';
                             }
+                            botao = "<input class='btn btn-primary btn-block' type='button' value='Eu Encontrei' name='btn_perfil' onclick='BtnPerfil(" + location.ani_id + ")' />"
                             break;
                         default:
                            switch (location.tipoani_nome) {
@@ -206,8 +210,7 @@ function setMarkers(gp) {
                                     "Animal: " + location.tipoani_nome + "<br />" +
                                     "Raça: " + location.raca_nome + "<br />" +
                                     "Porte: " + location.ani_porte + "<br />" +
-                                    "Situação: " + location.sit_nome + "</p>" +
-                                    "<input class='btn btn-primary btn-block' type='button' value='Ver Perfil do Animal' name='btn_perfil' onclick='BtnPerfil(" + location.ani_id + ")' />"
+                                    "Situação: " + location.sit_nome + "</p>" + botao
                             })
                         });
                         markers_on_map.push(new_marker);
