@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,28 +18,7 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <style type="text/css">
-   
-      #map { 
-        height: 100%; 
-      }
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .header {
-          height: 60px;
-          background: none;
-          background-color: #337ab7;
-      }
-      h1 small {
-          color: white;
-      }
-      
-
-    </style>
+    <link href="css/app.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -50,76 +30,82 @@
             <li class="sidebar-brand">
                 <a href="#top" onclick=$( "#menu-close").click();>Los Pets</a>
             </li>
-			<div id="btnLogin">
-				<li>
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-				</li>
-			</div>
-			<div id="btnLogout" hidden>
-				<li>
-					<input style="margin-left: 10px;" class="btn btn-primary" type="button" value="Logout" name="btn_tag" onclick="fbLogout()"/>
-				</li>
-			</div>
-			<li>
+            <div id="btnLogin">
+                <li>
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+                </li>
+            </div>
+            <div id="btnLogout" hidden>
+                <li>
+                    <input style="margin-left: 10px;" class="btn btn-primary" type="button" value="Logout" name="btn_tag" onclick="fbLogout()" />
+                </li>
+            </div>
+            <li>
                 <a href="index.html" onclick=$( "#menu-close").click();>Home</a>
             </li>
-			<div id="incluir" hidden>
-				<li>
-					<a href="incluiranimal.html" onclick=$( "#menu-close").click();>Incluir Animal</a>
-				</li>
-			</div>
+            <div id="incluir" hidden>
+                <li>
+                    <a href="incluiranimal.html" onclick=$( "#menu-close").click();>Incluir Animal</a>
+                </li>
+            </div>
             <li>
-				<a href="#" onclick=$( "#menu-close").click();>Mostrar todos os Animais</a>
-				<input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar todos animais" name="btn_tag" onclick="BtnCon()"/>
+                <a href="#" onclick=$( "#menu-close").click();>Aumentar o raio de pesquisa</a>
+                <div style="width: 150px;">
+                    <input style="margin-left: 20px;" type="range" value="1.5" min="0.5" max="10" step="0.5" style="width: 10px;" name="slider_raio" onchange="ajustaRaio(this.value)" />
+                </div>
             </li>
             <li>
-				<a href="#" onclick=$( "#menu-close").click();>Consultas</a>
-			    <form id="frm1" hidden>
-					 <select id="combo1" onchange="fnCombos(this.value)">
+                <a href="#" onclick=$( "#menu-close").click();>Mostrar todos os Animais</a>
+                <input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar todos animais" name="btn_tag" onclick="BtnCon()" />
+            </li>
+            <li>
+                <a href="#" onclick=$( "#menu-close").click();>Consultas</a>
+                <form id="frm1" hidden>
+                    <select id="combo1" onchange="fnCombos(this.value)">
 						 <option value='' selected="selected">Selecionar por...</option>
 						 <option value='tag'>Por Tag</option>
 						 <option value='porte'>Por Porte</option>
 						 <option value='raca'>Por Raça</option>
 						 <!--option value='mult'>Múltipla seleção...</option-->
 					 </select>
-				</form>	 
-				<form id="frm2">
-					 <select name="tag" id="combo2" hidden onchange="fnCombo2(this.value)"></select>
-				</form>
-				<form id="frm3"> 
-					 <select name="porte" id="combo3" hidden onchange="fnCombo3(this.value)"></select>
-				</form>
-				<form id="frm4">	 
-					 <select name="raca" id="combo4" hidden onchange="fnCombo4(this.value)"></select>
-				</form>
-				<form id="frm5">	 
-					 <select name="avulso" id="combo5" hidden onchange="fnCombo5(this.value)"></select>
-				</form>	
-				<form id="frm6" hidden>	
-				<div class="col-lg-10 col-lg-offset-1 text-left">
-					<a href="#top" onclick=$( "#menu-close").click();>Selecionar...</a>
-				</div>
-				<div class="col-lg-10 col-lg-offset-1 text-left">
-					 <select name="tagM" id="combo6">
+                </form>
+                <form id="frm2">
+                    <select name="tag" id="combo2" hidden onchange="fnCombo2(this.value)"></select>
+                </form>
+                <form id="frm3">
+                    <select name="porte" id="combo3" hidden onchange="fnCombo3(this.value)"></select>
+                </form>
+                <form id="frm4">
+                    <select name="raca" id="combo4" hidden onchange="fnCombo4(this.value)"></select>
+                </form>
+                <form id="frm5">
+                    <select name="avulso" id="combo5" hidden onchange="fnCombo5(this.value)"></select>
+                </form>
+                <form id="frm6" hidden>
+                    <div class="col-lg-10 col-lg-offset-1 text-left">
+                        <a href="#top" onclick=$( "#menu-close").click();>Selecionar...</a>
+                    </div>
+                    <div class="col-lg-10 col-lg-offset-1 text-left">
+                        <select name="tagM" id="combo6">
 						<option value='' selected="selected">Tag 1</option>
 						<option value='' selected="selected">Tag 2</option>
 					 </select>
-				</div>	 
-				<div class="col-lg-10 col-lg-offset-1 text-left">	 
-					 <select name="porteM" id="combo7">
+                    </div>
+                    <div class="col-lg-10 col-lg-offset-1 text-left">
+                        <select name="porteM" id="combo7">
 						<option value='' selected="selected">Porte 1</option>
 						<option value='' selected="selected">Porte 2</option>
 					 </select>
-				</div>	 
-				<div class="col-lg-10 col-lg-offset-1 text-left">	 
-					 <select name="racaM" id="combo8">
+                    </div>
+                    <div class="col-lg-10 col-lg-offset-1 text-left">
+                        <select name="racaM" id="combo8">
 						<option value='' selected="selected">Raça 1</option>
 						<option value='' selected="selected">Raça 2</option>
 					 </select>
-				</div>	 
-					 <input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar..." name="btn_mult" onclick="fechaMult()"/>
-				</form>
-			</li>
+                    </div>
+                    <input style="margin-left: 20px;" class="btn btn-primary" type="button" value="Localizar..." name="btn_mult" onclick="fechaMult()" />
+                </form>
+            </li>
             <li>
                 <a href="#ultimosEventos" onclick=$( "#menu-close").click();>Últimos eventos</a>
             </li>
@@ -130,152 +116,76 @@
     </nav>
 
     <!-- Header -->
-     <header id="header" class="header bg-primary">
-         <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 text-left">
-					<img src="img/logo.jpg" style = "border-radius: 100px;" alt="Los Pets" title="Seu Pet se encontra aqui" vspace="1px" hspace="1px" border="1px" align="left"/>
-                        <h1 align="center">Los Pets
-						<br>
+    <header id="header" class="header bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-left">
+                    <img src="img/logo.jpg" style="border-radius: 100px;" alt="Los Pets" title="Seu Pet se encontra aqui" vspace="1px" hspace="1px" border="1px" align="left" />
+                    <h1 align="center">Los Pets
+                        <br>
                         <small>O seu pet se encontra aqui!</small>
-                        </h1>
-                        <!-- /.row (nested) -->
-                    </div>
-                    <!-- /.col-lg-10 -->
+                    </h1>
+                    <!-- /.row (nested) -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col-lg-10 -->
             </div>
-            <!-- /.container -->
-     </header>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </header>
 
     <!-- Map -->
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box" onchange="autoComplete()" />
     <div id="map"></div>
-    <script type="text/javascript">
-        var map;
-        var markers_on_map = [];
-        var radius = 1500;
-        var coord = {lat: -30.03518581, lng: -51.22660625};
-        var circle;
-  
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: coord,
-            zoom: 12
-          });
-          var mRadius = new google.maps.Marker({
-				position: new google.maps.LatLng(coord),
-				map: map,
-				icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-          });
-          circle = new google.maps.Circle({
-            map: map,
-            radius: radius,
-            fillColor: '#AA0000'
-            });
-          circle.bindTo('center', mRadius, 'position');
-          
-           	$.ajax({
-				type:'post',		//Definimos o m�todo HTTP usado
-				dataType: 'json',	//Definimos o tipo de retorno
-				url: 'php/getDados.php',//Definindo o arquivo onde ser�o buscados os dados
-				success: function(dados){
-				    
-				    console.log(dados);
-				    
-                  	var address_lat_lng = new google.maps.LatLng(coord);
-                  	
-                	if(circle) map.fitBounds(circle.getBounds());
-                  	for (var j = 0; j < dados.length; j++) {
-                  	    
-                  		(function (location) {
-                  		    console.log(location);
-                  		    var marker_lat_lng = new google.maps.LatLng(location.ani_latitude, location.ani_longitude);
-                  			var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(address_lat_lng, marker_lat_lng);
-                  			if (distance_from_location <= radius) {
-                  				var new_marker = new google.maps.Marker({
-                  					position: marker_lat_lng,
-                  					map: map,
-                  					title: location.ani_nome,
-                  					infowindow: new google.maps.InfoWindow({
-                                        content: "<img src="+location.ani_imgpath+" style= 'border-radius: 50%; height:70px; width:70px;'></img><p><br />"
-                                        +"Nome: "+location.ani_nome+"<br />"
-                                        +"Raça: "+location.raca_nome+"<br />"
-                                        +"Animal: "+location.tipoani_nome+"<br />"
-                                        +"Porte: "+location.ani_porte+"</p>"
-                                    })
-                  				});
-                  				markers_on_map.push(new_marker);
-                  				google.maps.event.addListener(new_marker, 'click', function() {
-                                    this.infowindow.open(map, this);
-                                }); 
-                  			}
-                  		})(dados[j]);
-                  	}
-				},
-				error: function(){console.log('erro')}
-			});	
-			
-			function getLocation() {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-              } else {
-                alert("Geolocation is not supported by this browser.");
-              }
-            }
-            function showPosition(position) {
-              var lat = position.coords.latitude;
-              var lng = position.coords.longitude;
-              map.setCenter(new google.maps.LatLng(lat, lng));
-            }
-      }
-      </script>
-	  
-<!-- API do Google -->	  
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGoNeSNZCJ5k6CmrmJ1hCB5WzW4DPka0&v=3&callback=initMap"></script>
-        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<!-- Scripts das pesquisas -->
-		<script type="text/javascript" src="js/Consultas.js"></script>
-		<script type="text/javascript" src="js/fnMontaCombos.js"></script> 
-<!-- Facebook -->
-		<script type="text/javascript" src="js/facebookapi.js"></script> 
-<!-- jQuery -->
-		<script src="js/jquery.js"></script>
-<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script-->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-		<script src="js/bootstrap.min.js"></script>
- 
+    <div id="legend"><h3>Legenda</h3></div>
+    <script type="text/javascript" src="js/maps.js"></script>
+
+    <!-- API do Google -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGoNeSNZCJ5k6CmrmJ1hCB5WzW4DPka0&v=3&callback=initMap&libraries=places,geometry"></script>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!-- Scripts das pesquisas -->
+    <script type="text/javascript" src="js/Consultas.js"></script>
+    <script type="text/javascript" src="js/fnMontaCombos.js"></script>
+    <!-- Facebook -->
+    <script type="text/javascript" src="js/facebookapi.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
     <section id="ultimosEventos" class="section bg-primary">
-         <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 text-left">
-                        <h2>Últimos Eventos
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-left">
+                    <h2>Últimos Eventos
                         <small>Em desenvolvimento</small>
                         </h1>
                         <!-- /.row (nested) -->
-                    </div>
-                    <!-- /.col-lg-10 -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col-lg-10 -->
             </div>
-            <!-- /.container -->
-     </section>
-     
-     <section id="about" class="about">
-         <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 text-left">
-                        <h3>Quem somos
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-left">
+                    <h3>Quem somos
                         <small>Em desenvolvimento</small>
                         </h1>
                         <!-- /.row (nested) -->
-                    </div>
-                    <!-- /.col-lg-10 -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col-lg-10 -->
             </div>
-            <!-- /.container -->
-     </section>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -309,76 +219,77 @@
     </footer>
     <!-- Custom Theme JavaScript -->
     <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
+        // Closes the sidebar menu
+        $("#menu-close").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+        });
+        // Opens the sidebar menu
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+        });
+        // Scrolls to the selected menu item on the page
+        $(function() {
+            $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
+        //#to-top button appears after scrolling
+        var fixed = false;
+        $(document).scroll(function() {
+            if ($(this).scrollTop() > 250) {
+                if (!fixed) {
+                    fixed = true;
+                    // $('#to-top').css({position:'fixed', display:'block'});
+                    $('#to-top').show("slow", function() {
+                        $('#to-top').css({
+                            position: 'fixed',
+                            display: 'block'
+                        });
+                    });
+                }
+            }
+            else {
+                if (fixed) {
+                    fixed = false;
+                    $('#to-top').hide("slow", function() {
+                        $('#to-top').css({
+                            display: 'none'
+                        });
+                    });
                 }
             }
         });
-    });
-    //#to-top button appears after scrolling
-    var fixed = false;
-    $(document).scroll(function() {
-        if ($(this).scrollTop() > 250) {
-            if (!fixed) {
-                fixed = true;
-                // $('#to-top').css({position:'fixed', display:'block'});
-                $('#to-top').show("slow", function() {
-                    $('#to-top').css({
-                        position: 'fixed',
-                        display: 'block'
-                    });
-                });
-            }
-        } else {
-            if (fixed) {
-                fixed = false;
-                $('#to-top').hide("slow", function() {
-                    $('#to-top').css({
-                        display: 'none'
-                    });
-                });
-            }
-        }
-    });
-    // Disable Google Maps scrolling
-    // See http://stackoverflow.com/a/25904582/1607849
-    // Disable scroll zooming and bind back the click event
-    var onMapMouseleaveHandler = function(event) {
-        var that = $(this);
-        that.on('click', onMapClickHandler);
-        that.off('mouseleave', onMapMouseleaveHandler);
-        that.find('iframe').css("pointer-events", "none");
-    }
-    var onMapClickHandler = function(event) {
+        // Disable Google Maps scrolling
+        // See http://stackoverflow.com/a/25904582/1607849
+        // Disable scroll zooming and bind back the click event
+        var onMapMouseleaveHandler = function(event) {
             var that = $(this);
-            // Disable the click handler until the user leaves the map area
-            that.off('click', onMapClickHandler);
-            // Enable scrolling zoom
-            that.find('iframe').css("pointer-events", "auto");
-            // Handle the mouse leave event
-            that.on('mouseleave', onMapMouseleaveHandler);
+            that.on('click', onMapClickHandler);
+            that.off('mouseleave', onMapMouseleaveHandler);
+            that.find('iframe').css("pointer-events", "none");
         }
-        // Enable map zooming with mouse scroll when the user clicks the map
-    $('.map').on('click', onMapClickHandler);
+        var onMapClickHandler = function(event) {
+                var that = $(this);
+                // Disable the click handler until the user leaves the map area
+                that.off('click', onMapClickHandler);
+                // Enable scrolling zoom
+                that.find('iframe').css("pointer-events", "auto");
+                // Handle the mouse leave event
+                that.on('mouseleave', onMapMouseleaveHandler);
+            }
+            // Enable map zooming with mouse scroll when the user clicks the map
+        $('.map').on('click', onMapClickHandler);
     </script>
 
 </body>
