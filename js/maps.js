@@ -269,7 +269,7 @@ function legend() {
             icon2: iconBase + 'green/cat.png'
         },
         doacao: {
-            name: 'Animal Doação',
+            name: 'Animal para Adoção',
             icon1: iconBase + 'blue/dog.png',
             icon2: iconBase + 'blue/cat.png'
         },

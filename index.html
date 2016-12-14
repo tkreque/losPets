@@ -51,7 +51,8 @@
             <li>
                 <a href="#" onclick=$( "#menu-close").click();>Aumentar o raio de pesquisa</a>
                 <div style="width: 150px;">
-                    <input style="margin-left: 20px;" type="range" value="1.5" min="0.5" max="10" step="0.5" style="width: 10px;" name="slider_raio" onchange="ajustaRaio(this.value)" />
+                    <input style="margin-left: 20px;" type="range" value="1.5" min="0.5" max="10" step="0.5" name="slider_raio" onchange="ajustaRaio(this.value)"  oninput="display.value=slider_raio.value" id="slider_raio" />
+                    <output id="display" style="color: white; width: 40px; margin: 0px;" name="display" for="slider_raio">1.5</output>
                 </div>
             </li>
             <li>
